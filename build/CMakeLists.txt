@@ -106,6 +106,58 @@ set ( LUA_SOCKET
     luasocket/udp.c 
 )
 
+ #begin sproto
+ set (SPROTO_SRC 
+    sproto/sproto.c
+    sproto/lsproto.c
+    )
+ set_property(
+     SOURCE ${SPROTO_SRC}
+     APPEND
+     PROPERTY COMPILE_DEFINITIONS
+     LUA_LIB
+ )
+ list(APPEND THIRDPART_INC  sproto)
+ set (THIRDPART_SRC ${THIRDPART_SRC} ${SPROTO_SRC})
+ #end sproto
+
+  #begin luaecs
+  set (LUAECS_SRC 
+  luaecs/luaecs.c
+  luaecs/ecs_persistence.c
+  luaecs/ecs_template.c
+  luaecs/ecs_group.c
+  luaecs/ecs_capi.c
+  luaecs/ecs_entityid.c
+  )
+set_property(
+   SOURCE ${LUAECS_SRC}
+   APPEND
+   PROPERTY COMPILE_DEFINITIONS
+   LUA_LIB
+)
+list(APPEND THIRDPART_INC  sproto)
+set (THIRDPART_SRC ${THIRDPART_SRC} ${LUAECS_SRC})
+#end luaecs
+
+#begin lpeg
+ set (LPEG_SRC 
+    lpeg/lpvm.c
+    lpeg/lpprint.c
+    lpeg/lptree.c
+    lpeg/lpcode.c
+    lpeg/lpcap.c
+    )
+ set_property(
+     SOURCE ${LPEG_SRC}
+     APPEND
+     PROPERTY COMPILE_DEFINITIONS
+     LUA_LIB
+ )
+ list(APPEND THIRDPART_INC  lpeg)
+ set (THIRDPART_SRC ${THIRDPART_SRC} ${LPEG_SRC})
+ #end lpeg
+
 if ( WIN32 AND NOT CYGWIN )
     list (APPEND LUA_SOCKET luasocket/wsocket.c)
 else ( )
